@@ -6,25 +6,26 @@ function validInput(hand) {
     // Start off by creating a prompt in which users can enter a value and store it in a variable
     let userInput = prompt(`R, S, or P?`);
     // Create an array in which has a list of valid inputs to compare user input to
-let rps = [`R`, `P`, `S`];
-    do {
-        // make sure user input is capitalised to that it has the same value as the array
-        hand = userInput.toLocaleUpperCase();
-        // log to see if it works
-        // if it is a valid input, store input into userHand
-        if (rps.includes(hand)) {
-            userHand = hand;
-            console.log(`User choice: ${hand}`);
-            // if it is not a valid input, ask user to try again
-        } else {
-            alert(`"${hand}" is invalid, please enter valid input.`);
-            console.log(`Invalid input: ${hand}`);
-            userInput = prompt(`R, S, or P?`);
-        }
-        // loop while the input is not valid
-    } while (!rps.includes(hand));
+    let rps = [`R`, `P`, `S`];
+    // loop while the input is not valid
+    while (!rps.includes(hand)) {
+            // make sure user input is capitalised to that it has the same value as the array
+            hand = userInput.toLocaleUpperCase();
+            // log to see if it works
+            // if it is a valid input, store input into userHand
+            if (rps.includes(hand)) {
+                userHand = hand;
+                console.log(`User choice: ${hand}`);
+                // if it is not a valid input, ask user to try again
+            } else {
+                alert(`"${hand}" is invalid, please enter valid input.`);
+                console.log(`Invalid input: ${hand}`);
+                userInput = prompt(`R, S, or P?`);
+            }
+        };
 }
 
+// Create a variable to hold pc input in the global scope as it will be accessed by multiple functions
 let pcHand = ``;
 
 // Create a function that will random generate RPS for the computer
@@ -60,13 +61,39 @@ let gameData = {
     }
 }
 
+function gameResult(user, pc) {
+    if (user === pc) {
+        return 'tie';
+    }
+    if (user === `R` && pc === `S`) {
+        return `win`;
+    }
+    if (user === `R` && pc === `P`) {
+        return `lose`;
+    }
+    if (user === `S` && pc === `R`) {
+        return `lose`;
+    }
+    if (user === `S` && pc === `P`) {
+        return `win`;
+    }
+    if (user === `P` && pc === `R`) {
+        return `win`;
+    }
+    if (user === `P` && pc === `S`) {
+        return `lose`;
+    }
+}
+
 let gameContinue = true;
 
+// create a loop that will end when the user cancels
 while (gameContinue) {
     // call function with user input
     validInput();
     // Call generateHand function
     generateHand();
+    console.log(gameResult(userHand, pcHand));
     gameData.gamesPlayed = gameData.gamesPlayed + 1;
     let userStillGame = confirm(`Do you still want to continue?`);
     if (userStillGame === false) {
@@ -75,3 +102,4 @@ while (gameContinue) {
 };
 
 console.log(`Games played: ${gameData.gamesPlayed}`);
+console.log(gameData);

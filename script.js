@@ -160,7 +160,6 @@ while (gameContinue) {
 
 stats();
 
-let rpsFinal = `Games played: ${gameData.gamesPlayed}\nWins: ${gameData.wins}\nDraws: ${gameData.draws}\nLoses: ${gameData.losses}\nMove History\nRock: ${gameData.moveHistory.rock}\nPaper: ${gameData.moveHistory.paper}\nScissors: ${gameData.moveHistory.scissors}`;
+let rpsFinal = `Games played: ${gameData.gamesPlayed} |\nWins: ${gameData.wins} |\nDraws: ${gameData.draws} |\nLoses: ${gameData.losses} |\nMove History |\nRock: ${gameData.moveHistory.rock} |\nPaper: ${gameData.moveHistory.paper} |\nScissors: ${gameData.moveHistory.scissors}`;
 
-document.getElementById("rpsResults").textContent = rpsFinal;
-console.log(rpsFinal);
+document.getElementById("rpsResults").innerHTML = rpsFinal;
